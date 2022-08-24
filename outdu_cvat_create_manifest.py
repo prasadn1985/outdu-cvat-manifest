@@ -66,7 +66,11 @@ def runCommands(commands_all):
 
     for commands in commands_all:
         print(commands)
-        if subprocess.run(commands).returncode == 0:
+        p = subprocess.run(commands, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print( 'exit status:', p.returncode )
+        print( 'stdout:', p.stdout.decode() )
+        print( 'stderr:', p.stderr.decode() )
+        if p.returncode == 0:
             print ("Script Ran Successfully")
         else:
             print ("There was an error running your script")
