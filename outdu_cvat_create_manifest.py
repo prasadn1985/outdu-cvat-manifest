@@ -38,7 +38,8 @@ def buildKeyFrameExtractCommand(path, file):
 
     return [commands_list1, commands_list2, commands_list3]
 
-def buildManifestCreateCommand(dirpath, create_manifest, output_dir):
+def buildManifestCreateCommand(input_dir, dir, create_manifest, output_dir):
+    dirpath=os.path.join(input_dir, dir)
     commands1 = [
 	"python3",
 	create_manifest,
@@ -47,12 +48,19 @@ def buildManifestCreateCommand(dirpath, create_manifest, output_dir):
 	dirpath
     ]
     
+    test_output_dir=os.path.join(output_dir, dir)
     commands2 = [
+    "rm",
+    "-r",
+    test_output_dir
+    ]
+
+    commands3 = [
     "mv",
     dirpath,
     output_dir
     ]
-    return [commands1, commands2]  
+    return [commands1, commands2, commands3]  
 
 def runCommands(commands_all):
 
@@ -98,5 +106,4 @@ for bucket in buckets:
              
     for dir in dirs:
         print(dir)
-        dirpath=os.path.join(bucket_path,dir)
-        runCommands(buildManifestCreateCommand(dirpath, create_manifest_script_path, output_bucket_path))
+        runCommands(buildManifestCreateCommand(bucket_path, dir, create_manifest_script_path, output_bucket_path))
