@@ -1,0 +1,1 @@
+# outdu-cvat-manifest
