@@ -51,7 +51,7 @@ def buildManifestCreateCommand(input_dir, dir, create_manifest, output_dir):
     test_output_dir=os.path.join(output_dir, dir)
     commands2 = [
     "rm",
-    "-r",
+    "-rf",
     test_output_dir
     ]
 
