@@ -20,5 +20,13 @@ RUN mkdir /app
 ADD outdu_cvat_create_manifest.py /app
 ADD run.sh /app
 
-CMD ["/app/run.sh"]
+RUN chmod 0644 /app/run.sh
+#Install Cron
+RUN apt-get update
+RUN apt-get -y install cron
 
+# Add the cron job
+RUN crontab -l | { cat; echo "* * * * * bash /app/run.sh"; } | crontab -
+RUN touch /tmp/app.log
+ADD run_live.sh /app
+RUN chmod +x /app/run_live.sh

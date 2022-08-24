@@ -1,6 +1,7 @@
 import subprocess
 import os
 import sys
+import datetime
 
 def buildKeyFrameExtractCommand(path, file):
 
@@ -68,6 +69,7 @@ def runCommands(commands_all):
             break
 
 
+print(datetime.datetime.now())
 path=sys.argv[1]
 output_path=sys.argv[2]
 create_manifest_script_path=sys.argv[3]
