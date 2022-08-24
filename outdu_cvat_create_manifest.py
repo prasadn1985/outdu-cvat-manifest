@@ -71,15 +71,15 @@ def runCommands(commands_all):
 
 print(datetime.datetime.now())
 path=sys.argv[1]
-output_path=sys.argv[2]
-create_manifest_script_path=sys.argv[3]
+create_manifest_script_path=sys.argv[2]
 
 buckets = (file for file in os.listdir(path) 
          if os.path.isdir(os.path.join(path, file)))
 
 for bucket in buckets:
     print(bucket)
-    output_bucket_path=os.path.join(output_path, bucket)
+    output_bucket_path1=os.path.join(path, bucket)
+    output_bucket_path=os.path.join(output_bucket_path1, "processed")
     commands_list1 = [
     "mkdir",
     "-p",
@@ -87,7 +87,8 @@ for bucket in buckets:
     ]
     runCommands([commands_list1])
 
-    bucket_path=os.path.join(path, bucket)
+    bucket_path1=os.path.join(path, bucket)
+    bucket_path=os.path.join(bucket_path1, "wip")
 
     files = (file for file in os.listdir(bucket_path) 
              if os.path.isfile(os.path.join(bucket_path, file)))
